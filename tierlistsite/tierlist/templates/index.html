@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+  <h1 class="banner">Smash Home</h1>
+  <p>Welcome to SmashList, a website developed by <em>Moi</em>!</p>
+  <h2>Dynamic content</h2>
+  <p>The library has the following record counts:</p>
+  <ul>
+    <li><strong>Tiers:</strong> {{ num_tiers }}</li>
+    <li><strong>Fighters:</strong> {{ num_fighters }}</li>
+
+  </ul>
+  <div class="tier-container">
+
+
+  </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+
+.sidebar-nav{
+
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+
+}
+
+.banner{
+    text-align:center;
+    background: black;
+    color: white;
+
+}
+
+#tiers{
+    background: grey;
+    color: white;
+}
