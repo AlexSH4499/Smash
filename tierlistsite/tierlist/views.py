@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
+from rest_framework.generics import ListCreateAPIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
@@ -7,6 +8,18 @@ from rest_framework import status
 
 from tierlist.models import Fighter, Tier
 from tierlist.serializers import *
+
+class FighterReadView(ListCreateAPIView):
+    queryset = Fighter.objects.all()
+    serializer_class = FighterSerializer
+    lookup_field = 'name'
+
+@api_view(['GET'])
+def list(request):
+    data = []
+    fighters = Fighter.objects.all()
+    serializer = FighterSerializer(data,context={'request':request}, many=True)
+    return Response({'data':serializer.data})
 
 @api_view(['GET','POST'])
 def fighters_list(request):
@@ -25,7 +38,7 @@ def fighters_list(request):
         except EmptyPage:
             data = paginator.page(paginator.num_pages)
 
-        serializer = CustomerSerializer(data,context=\
+        serializer = FighterSerializer(data,context=\
                                         {'request':request}, many=True)
         if data.has_next():
             nextPage = data.next_page_number()
@@ -44,25 +57,28 @@ def fighters_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def fighters_detail(request, id):
+def fighters_detail(request):
     try:
-        fighter = Fighter.objects.get(id=id)
+        fighters = Fighter.objects.all()
     except Fighter.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = FighterSerializer(fighter,context={'request': request})
-        return Response(serializer.data)
+        dat = []
+        for f in fighters:
+            dat.append(FighterSerializer(f, context={'request': request}).data)
+
+        return Response(dat)
 
     elif request.method == 'PUT':
-        serializer = FighterSerializer(fighter, data=request.data,context={'request': request})
+        serializer = FighterSerializer(fighters, data=request.data,context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        fighter.delete()
+        fighters.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 def index(request):

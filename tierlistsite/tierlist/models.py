@@ -13,7 +13,7 @@ class Fighter(models.Model):
         return self.name
 
 class Tier(models.Model):
-    id = models.IntegerField(max_length =1,primary_key=True)
+    id = models.IntegerField(max_length=1, primary_key=True)
     label = models.CharField(max_length=22)
     color = models.IntegerField(max_length=6)
     fighters = models.ManyToManyField(Fighter)
