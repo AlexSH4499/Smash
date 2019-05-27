@@ -15,7 +15,7 @@
     "eject": "react-scripts eject",
 	"postinstall" : "npm run build"
   },
-  "main": ".\\tierlistsite\\frontend\\public\\index.js",
+  "main": ".\frontend\src\index.js",
   "engines":{
 	"node": "10.15.3",
 	"npm":"6.4.1"
