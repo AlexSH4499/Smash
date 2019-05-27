@@ -8,6 +8,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5"
   },
+  "homepage":"./frontend/index.html",
   "scripts": {
     "start": "react-scripts start echo starting",
     "build": "react-scripts build",
