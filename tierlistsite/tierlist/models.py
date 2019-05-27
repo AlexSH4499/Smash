@@ -2,9 +2,11 @@ from django.db import models
 
 # Create your models here.
 class Fighter(models.Model):
-    id = models.IntegerField(max_length=3, primary_key=True)
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=50)
     img = models.ImageField()
+    first_appearance = models.CharField(max_length=30, default="SSB64")
+    origin_game = models.CharField(max_length=30, default="Super Mario")
 
     class Meta:
         ordering = ['-id']
@@ -13,9 +15,9 @@ class Fighter(models.Model):
         return self.name
 
 class Tier(models.Model):
-    id = models.IntegerField(max_length=1, primary_key=True)
+    id = models.IntegerField(primary_key=True)
     label = models.CharField(max_length=22)
-    color = models.IntegerField(max_length=6)
+    color = models.IntegerField()
     fighters = models.ManyToManyField(Fighter)
 
     class Meta:

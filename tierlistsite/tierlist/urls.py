@@ -7,10 +7,13 @@ urlpatterns = [
     #     view=views.list,
     #     name="fighters_api"
     #     ),
-    url(r'api/',
+    url(regex=r'api/',
         view=views.fighters_detail,
         name="fighters_api"
-        )
+        ),
+    url(regex=r'^fighters/api/$',
+        view = views.FighterReadView.as_view(),
+        name = "fighters_api")
     # path(r'^/fighters/$', views.fighters_list),
     # path(r'^/fighters/(?P<pk>[0-9]+)$', views.fighters_detail),
 ]

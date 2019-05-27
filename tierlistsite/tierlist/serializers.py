@@ -7,4 +7,4 @@ class FighterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Fighter
-        fields = ('id', 'name', 'img')
+        fields = ('id', 'name', 'img', 'first_appearance', 'origin_game')

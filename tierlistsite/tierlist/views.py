@@ -14,6 +14,7 @@ class FighterReadView(ListCreateAPIView):
     serializer_class = FighterSerializer
     lookup_field = 'name'
 
+
 @api_view(['GET'])
 def list(request):
     data = []
